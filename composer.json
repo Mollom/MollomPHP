@@ -1,0 +1,10 @@
+{
+	"name": "mollom/mollom",
+	"description": "A generic PHP class for Mollom's REST API.",
+	"license": "MIT",
+	"keywords": ["mollom"],
+	"authors": [{
+		"name": "Sun",
+		"email": "sun@unleashedmind.com"
+	}]
+}
