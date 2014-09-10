@@ -7,6 +7,8 @@
  * @license MIT|GNU GPL v2
  *   See LICENSE-MIT.txt or LICENSE-GPL.txt shipped with this library.
  */
+ 
+ namespace Mollom\Client;
 
 /**
  * The base class for Mollom client implementations.
