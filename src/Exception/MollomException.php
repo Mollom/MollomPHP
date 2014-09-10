@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\mollom\Exception;
+namespace Mollom\Exception;
 
 /**
  * A catchable Mollom exception.

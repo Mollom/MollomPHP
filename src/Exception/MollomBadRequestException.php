@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\mollom\Exception;
+namespace Mollom\Exception;
 
 /**
  * Mollom error due to bad client request exception.

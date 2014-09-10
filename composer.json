@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mollom\\Client\\": "src/"
+            "Mollom\\": "src/"
         }
     }
 }

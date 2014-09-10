@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\mollom\Exception;
+namespace Mollom\Exception;
 
 /**
  * Mollom network error exception.
