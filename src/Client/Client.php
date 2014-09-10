@@ -9,7 +9,12 @@
  */
 namespace Mollom\Client;
 
+use Mollom\Exception\MollomAuthenticationException;
+use Mollom\Exception\MollomBadRequestException;
 use \Mollom\Exception\MollomException;
+use Mollom\Exception\MollomNetworkException;
+use Mollom\Exception\MollomResponseException;
+use stdClass;
 
 /**
  * The base class for Mollom client implementations.
@@ -494,7 +499,7 @@ abstract class Client {
     }
     else {
       $headers = array();
-      $response = new stdClass;
+      $response = new stdClass();
       $response->code = self::AUTH_ERROR;
       $response->message = 'Missing API keys.';
       $response->isError = TRUE;
@@ -739,13 +744,13 @@ abstract class Client {
    * $parsed_response = $this->parseXML($elements);
    * @endcode
    *
-   * @param SimpleXMLIterator $sxi
+   * @param \SimpleXMLIterator $sxi
    *   A SimpleXMLIterator structure of the server response body.
    *
    * @return array
    *   An associative, possibly multidimensional array.
    */
-  public static function parseXML(SimpleXMLIterator $sxi) {
+  public static function parseXML(\SimpleXMLIterator $sxi) {
     $a = array();
     $remove = array();
     for ($sxi->rewind(); $sxi->valid(); $sxi->next()) {
@@ -922,6 +927,7 @@ abstract class Client {
    *   parameters in non-PHP format; e.g., 'foo=one&foo=bar'.
    */
   public static function getServerParameters() {
+    $data = NULL;
     if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD') {
       $data = self::httpParseQuery($_SERVER['QUERY_STRING']);
     }
