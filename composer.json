@@ -1,10 +1,20 @@
 {
-  "name": "mollom/client",
-  "description": "Generic PHP library for Mollom's REST API.",
-  "license": "MIT",
-  "keywords": ["mollom", "spam"],
-  "authors": [{
-    "name": "sun",
-    "email": "sun@mollom.com"
-  }]
+    "name": "mollom/client",
+    "type": "",
+    "description": "Generic PHP library for Mollom's REST API.",
+    "license": "MIT",
+    "keywords": ["mollom", "spam", "acquia"],
+    "authors": [
+        {
+            "name": "See contributors",
+            "homepage": "https://github.com/mollom/MollomPHP/graphs/contributors"
+        }
+    ],
+    "require": {
+    "php": ">=5.3.0",
+    "autoload": {
+        "psr-4": {
+            "Mollom\\Client\\": "src/"
+        }
+    }
 }
