@@ -1,6 +1,7 @@
 <?php
 
 namespace Mollom\Exception;
+use Mollom\Client\Client;
 
 /**
  * A catchable Mollom exception.
@@ -40,9 +41,9 @@ namespace Mollom\Exception;
  */
 class MollomException extends \Exception {
   /**
-   * @var Mollom
+   * @var \Mollom\Client\Client $client
    */
-  protected $mollom;
+  protected $client;
 
   /**
    * The severity of this exception.
@@ -57,7 +58,7 @@ class MollomException extends \Exception {
   /**
    * Overrides Exception::__construct().
    */
-  function __construct($message = '', $code = 0, Exception $previous = NULL, Mollom $mollom, array $request_info = array()) {
+  function __construct($message = '', $code = 0, \Exception $previous = NULL, Client $client, array $request_info = array()) {
     // Fatal error on PHP <5.3 when passing more arguments to Exception.
     if (version_compare(phpversion(), '5.3') >= 0) {
       parent::__construct($message, $code, $previous);
@@ -65,10 +66,10 @@ class MollomException extends \Exception {
     else {
       parent::__construct($message, $code);
     }
-    $this->mollom = $mollom;
+    $this->client = $client;
 
     // Set the error code on the Mollom class.
-    $mollom->lastResponseCode = $code;
+    $client->lastResponseCode = $code;
 
     // Log the exception.
     // To aid Mollom technical support, include the IP address of the server we
@@ -84,13 +85,13 @@ class MollomException extends \Exception {
       'arguments' => array(
         '@code' => $code,
         '%message' => $message,
-        '@server-ip' => gethostbyname($mollom->server),
+        '@server-ip' => gethostbyname($client->server),
       ),
     );
     // Add HTTP request information, if available.
     if (!empty($request_info)) {
       $message += $request_info;
     }
-    $mollom->log[] = $message;
+    $client->log[] = $message;
   }
 }
