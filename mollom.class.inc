@@ -667,7 +667,7 @@ abstract class Mollom {
     //   (if any)
     // delimited by "&". (3.4.1.1)
     $base_string = implode('&', array(
-      $method,
+      strtoupper($method),
       self::rawurlencode($server . '/' . $path),
       self::rawurlencode($oauth_query),
     ));
@@ -680,7 +680,7 @@ abstract class Mollom {
     // to query parameters.
     if ($this->oAuthStrategy == 'header') {
       foreach ($oauth as $key => $value) {
-        $oauth[$key] = $key . '="' . self::rawurlencode($value) . '"';
+        $oauth[$key] = self::rawurlencode($key) . '="' . self::rawurlencode($value) . '"';
       }
       // Header parameters are joined and delimited by comma. (3.5.1)
       $headers['Authorization'] = 'OAuth ' . implode(', ', $oauth);
@@ -832,7 +832,7 @@ abstract class Mollom {
         $key = rawurlencode($parent);
       }
       else {
-        $key = ($parent ? $parent . '[' . rawurlencode($key) . ']' : rawurlencode($key));
+        $key = ($parent ? $parent . rawurlencode('[' . $key . ']') : rawurlencode($key));
       }
 
       // Recurse into children.
