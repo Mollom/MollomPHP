@@ -668,19 +668,19 @@ abstract class Mollom {
     // delimited by "&". (3.4.1.1)
     $base_string = implode('&', array(
       $method,
-      self::rawurlencode($server . '/' . $path),
-      self::rawurlencode($oauth_query),
+      rawurlencode($server . '/' . $path),
+      rawurlencode($oauth_query),
     ));
     // Key is unconditionally compound of client secret and token secret, even
     // if empty. (3.4.2)
-    $key = self::rawurlencode($this->privateKey) . '&' . '';
+    $key = rawurlencode($this->privateKey) . '&' . '';
     $oauth['oauth_signature'] = base64_encode(hash_hmac('sha1', $base_string, $key, TRUE));
 
     // Add the OAuth protocol parameters as HTTP header, or append the signature
     // to query parameters.
     if ($this->oAuthStrategy == 'header') {
       foreach ($oauth as $key => $value) {
-        $oauth[$key] = $key . '="' . self::rawurlencode($value) . '"';
+        $oauth[$key] = $key . '="' . rawurlencode($value) . '"';
       }
       // Header parameters are joined and delimited by comma. (3.5.1)
       $headers['Authorization'] = 'OAuth ' . implode(', ', $oauth);
@@ -692,20 +692,6 @@ abstract class Mollom {
     }
 
     return $query;
-  }
-
-  /**
-   * Encodes a URL compliant with OAuth RFC 5849.
-   *
-   * @param string $value
-   *   The URL string to be encoded.
-   *
-   * @return string
-   *   The rawurlencode()d URL, containing string literals for "~" (tildes) and
-   *   " " (spaces). (RFC 5849 3.4.1.3.1 and 3.6)
-   */
-  public static function rawurlencode($value) {
-    return strtr(rawurlencode($value), array('%7E' => '~', '+' => ' '));
   }
 
   /**
