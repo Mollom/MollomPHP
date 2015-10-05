@@ -10,7 +10,7 @@ To submit bug reports and feature suggestions, or to track changes:
 
 ## Requirements
 
-* [PHP](http://php.net) 5.2.4 or later
+* [PHP](http://php.net) 5.3.4 or later
 
 
 ## Usage
