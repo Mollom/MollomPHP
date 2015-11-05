@@ -11,10 +11,11 @@ namespace Mollom\Client;
 
 use Mollom\Exception\MollomAuthenticationException;
 use Mollom\Exception\MollomBadRequestException;
-use \Mollom\Exception\MollomException;
+use Mollom\Exception\MollomException;
 use Mollom\Exception\MollomNetworkException;
 use Mollom\Exception\MollomResponseException;
 use stdClass;
+use \SimpleXMLIterator;
 
 /**
  * The base class for Mollom client implementations.
